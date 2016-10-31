@@ -31,4 +31,10 @@ end
 			expect(@task.make_incomplete!).to eq(false)
 		end
 	end
+
+	describe "update_content!" do
+		it "when a task is updated, updated_at should be the current time" do
+			expect(@task.update_content!).to eq(Time.now.strftime("%Y-%d-%m %H:%M"))
+		end
+	end
 end

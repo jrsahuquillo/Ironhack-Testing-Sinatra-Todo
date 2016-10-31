@@ -1,14 +1,16 @@
 
 class Task
-    attr_reader :content, :id
+    attr_reader :content, :id, :created_at, :updated_at
     @@current_id = 1
 
-    def initialize(content)
+    def initialize(content, updated_at = nil)
         @content = content
         @id = @@current_id
         @@current_id += 1
         @incomplete = false
-        @complete = true 
+        @complete = true
+        @created_at  = Time.now
+        @updated_at = updated_at
     end
 
     def complete?
@@ -22,6 +24,10 @@ class Task
     def make_incomplete!
     	@incomplete
     end
+
+    def update_content!
+    	@updated_at = Time.now.strftime("%Y-%d-%m %H:%M")
+    end
 end
 
 # task = Task.new("Buy the milk")
@@ -34,3 +40,16 @@ end
 # task = Task.new("Buy the milk")
 # task.complete?
 # # false
+
+# task = Task.new("Buy the dog")
+# puts task.content 
+# # Buy the dog
+# task2 = Task.new("Walk the milk")
+# puts task2.content 
+# # Walk the milk
+# task.update_content!("Buy the milk")
+# task2.update_content!("Walk the dog")
+# puts task.content 
+# # Buy the milk
+# puts task2.content 
+# # Walk the dog
