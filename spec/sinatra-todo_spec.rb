@@ -4,15 +4,14 @@ require "rspec"
 
 RSpec.describe Task do
 	before :each do
-	 @task = Task.new("Feed the cat")
-
-end
+		@task = Task.new("Feed the cat")
+	end
 
 	describe "#id" do
 		it "counts number of tasks created" do
-		expect(@task.id).to eq(1)
+			expect(@task.id).to eq(1)
+		end
 	end
-end
 
 	describe "complete?" do
 		it "advises if a task is complete or not" do
@@ -37,4 +36,36 @@ end
 			expect(@task.update_content!).to eq(Time.now.strftime("%Y-%d-%m %H:%M"))
 		end
 	end
+end
+
+RSpec.describe Todolist do
+	before :each do
+    	@todo = Todolist.new("Sahu")
+  	end
+
+ 	describe "add_task" do
+		it "add our task to the list of tasks" do
+			tasks_length = @todo.tasks.length
+			@todo.add_task(Task.new("Feed the cat"))
+			expect(@todo.tasks.size).to eq(tasks_length + 1)
+ 		end
+ 		it "add our task to the list of tasks" do
+ 			task = Task.new("Feed the cat")
+			@todo.add_task(task)
+			expect(@todo.tasks).to include(task)
+ 		end
+ 	end
+	
+	describe "delete_task" do
+		it "delete task by its ID" do
+			task = Task.new("Feed the cat")
+			@todo.add_task(task)
+			expect(@todo.delete_task(1).size).to eq(1)
+ 		end
+ 		it "delete task by its ID" do
+			task = Task.new("Wash the car")
+			@todo.delete_task(task.id)
+			expect(@todo.tasks.include?(task)).to eq(false)
+ 		end
+ 	end
 end

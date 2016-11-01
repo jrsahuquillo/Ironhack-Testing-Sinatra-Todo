@@ -1,3 +1,4 @@
+require 'pry'
 
 class Task
     attr_reader :content, :id, :created_at, :updated_at
@@ -30,6 +31,22 @@ class Task
     end
 end
 
+class Todolist
+     attr_reader :tasks, :user, :id
+     def initialize(user)
+         @user = user
+         @tasks = []
+     end
+
+     def add_task(task)
+         @tasks.push(task)
+     end
+
+     def delete_task(id)
+        @tasks.delete_if {|i| i == id }
+    end
+end
+
 # task = Task.new("Buy the milk")
 # puts task.id
 # # 1
@@ -44,6 +61,7 @@ end
 # task = Task.new("Buy the dog")
 # puts task.content 
 # # Buy the dog
+
 # task2 = Task.new("Walk the milk")
 # puts task2.content 
 # # Walk the milk
@@ -53,3 +71,8 @@ end
 # # Buy the milk
 # puts task2.content 
 # # Walk the dog
+
+
+# todo = Todolist.new("Sahu")
+# todo.add_task(task)
+ 
