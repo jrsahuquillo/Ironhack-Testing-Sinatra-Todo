@@ -68,4 +68,15 @@ RSpec.describe Todolist do
 			expect(@todo.tasks.include?(task)).to eq(false)
  		end
  	end
+
+ 	describe "find_task_by_id" do
+		it "finds any task by its id" do
+			task = Task.new("Feed the cat")
+			@todo.add_task(task)
+			expect(@todo.find_task_by_id(10)).to eq(task)
+ 		end
+ 		it "shows nil if the ID doesn't exists" do
+			expect(@todo.find_task_by_id(11)).to eq(nil)
+ 		end
+ 	end
 end
