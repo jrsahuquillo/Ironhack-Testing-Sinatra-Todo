@@ -32,10 +32,11 @@ class Task
 end
 
 class Todolist
-  attr_reader :tasks, :user, :id
+  attr_reader :tasks, :user, :id, :sorted_tasks
   def initialize(user)
     @user = user
     @tasks = []
+    @sorted_tasks = []
   end
 
   def add_task(task)
@@ -48,6 +49,10 @@ class Todolist
 
   def find_task_by_id(id)
     @tasks.find {|task| task.id == id}
+  end
+
+  def sort_by_created
+    @sorted_tasks = @tasks.sort {|t1, t2| t2.created_at <=> t1.created_at }
   end
 
 end
@@ -86,3 +91,4 @@ end
 # todo_list.add_task(Task.new("Buy the milk"))
 # task = todo_list.find_task_by_id(2)
 # puts task.content
+# puts @sorted_tasks

@@ -78,5 +78,15 @@ RSpec.describe Todolist do
  		it "shows nil if the ID doesn't exists" do
 			expect(@todo.find_task_by_id(11)).to eq(nil)
  		end
+
+ 	describe "sort_by_created do"
+		it "sort tasks by creation date" do
+			task1 = Task.new("Feed the cat")
+			task2 = Task.new("Wash the car")
+			@todo.add_task(task1)
+			@todo.add_task(task2)
+			@todo.sort_by_created
+			expect(task2.created_at > task1.created_at).to eq(true)
+ 		end
  	end
 end
